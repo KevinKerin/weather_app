@@ -17,7 +17,11 @@ class MyAdapter(private val data: Data) : RecyclerView.Adapter<MyAdapter.ViewHol
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 //        val currentItem = itemList[position]
-        val currentItem = data.venueList[position]
+        println(data)
+        println("data.isOkay" + data.isOkay)
+        println("data.ret" + data.ret)
+        println("data.data" + data.data)
+        val currentItem = data.data[position]
 
         holder.imageView.setImageResource(currentItem.imageResource)
         holder.textView1.text = currentItem._name
@@ -29,13 +33,14 @@ class MyAdapter(private val data: Data) : RecyclerView.Adapter<MyAdapter.ViewHol
     }
 
     override fun getItemCount(): Int{
-        return data.venueList.size
+        return 500
+        return data.data.size
     }
 
-    class ViewHolder(itemView: View ) : RecyclerView.ViewHolder(itemView) {
-        val imageView: ImageView = itemView.image_view
-        val textView1: TextView = itemView.text_view_1
-        val textView2: TextView = itemView.text_view_2
-    }
+class ViewHolder(itemView: View ) : RecyclerView.ViewHolder(itemView) {
+    val imageView: ImageView = itemView.image_view
+    val textView1: TextView = itemView.text_view_1
+    val textView2: TextView = itemView.text_view_2
+}
 
 }

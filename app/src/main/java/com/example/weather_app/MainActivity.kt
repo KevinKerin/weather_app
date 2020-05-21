@@ -33,7 +33,9 @@ class MainActivity : AppCompatActivity() {
 
                 val gson = GsonBuilder().create()
 
-                val data = gson.fromJson(body, Data::class.java)
+                val data: Data = gson.fromJson(body, Data::class.java)
+
+                println(data.data[0])
 
                 runOnUiThread {
                     recycler_view.adapter = MyAdapter(data)
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
 }
 
-class Data(val ret: Boolean, val isOkay: Boolean, val venueList: List<Venue>)
+class Data(val ret: Boolean, val isOkay: Boolean, val data: List<Venue>)
 
 class Venue(val _venueId: String, val _name: String, val _country: Country, val _weatherCondition: String, val  _weatherConditionIcon: String, val _weatherWind: String,
            val _weatherHumidity: String, val _weatherTemp: String, val _weatherFeelsLike: String, val _sport: Sport, val _weatherLastUpdated: String, val imageResource: Int)
