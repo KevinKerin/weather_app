@@ -21,6 +21,7 @@ class MyAdapter(private val data: WeatherData) : RecyclerView.Adapter<MyAdapter.
         holder.imageView.setImageResource(currentItem.imageResource)
         holder.textView1.text = currentItem._name
         holder.textView2.text = currentItem._weatherCondition
+        holder.textView3.text = currentItem._weatherTempInt.toString()
     }
 
     override fun getItemCount(): Int{
@@ -31,6 +32,7 @@ class ViewHolder(itemView: View ) : RecyclerView.ViewHolder(itemView) {
     val imageView: ImageView = itemView.image_view
     val textView1: TextView = itemView.text_view_1
     val textView2: TextView = itemView.text_view_2
+    val textView3: TextView = itemView.text_view_3
 }
 
 }

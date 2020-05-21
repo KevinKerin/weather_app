@@ -93,22 +93,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun sortByTemperature(view: View){
-        venueList.sortedBy { it._weatherTempInt }
+        venueList = venueList.sortedBy { it._weatherTempInt }
         updateView()
     }
 
     fun sortByTemperatureDescending(view: View){
-        venueList.sortedByDescending { it._weatherTempInt }
+        venueList = venueList.sortedByDescending { it._weatherTempInt }
         updateView()
     }
 
     fun sortByLastUpdated(view: View){
-        venueList.sortedBy { it._weatherTempInt }
+        venueList = venueList.sortedBy { it._weatherTempInt }
         updateView()
     }
 
     fun sortByLastUpdatedDescending(view: View){
-        venueList.sortedByDescending { it._weatherLastUpdated }
+        venueList = venueList.sortedByDescending { it._weatherLastUpdated }
         updateView()
     }
 
