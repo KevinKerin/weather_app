@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item.view.*
 
-class MyAdapter(private val data: Data) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+class MyAdapter(private val data: WeatherData) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item, parent, false)
@@ -16,24 +16,14 @@ class MyAdapter(private val data: Data) : RecyclerView.Adapter<MyAdapter.ViewHol
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        val currentItem = itemList[position]
-        println(data)
-        println("data.isOkay" + data.isOkay)
-        println("data.ret" + data.ret)
-        println("data.data" + data.data)
         val currentItem = data.data[position]
 
         holder.imageView.setImageResource(currentItem.imageResource)
         holder.textView1.text = currentItem._name
         holder.textView2.text = currentItem._weatherCondition
-
-//        holder.imageView.setImageResource(currentItem.imageResource)
-//        holder.textView1.text = currentItem.text1
-//        holder.textView2.text = currentItem.text2
     }
 
     override fun getItemCount(): Int{
-        return 500
         return data.data.size
     }
 
