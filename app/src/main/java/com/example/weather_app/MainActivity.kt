@@ -3,6 +3,10 @@ package com.example.weather_app
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
@@ -20,6 +24,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        toolBar.title = "Tab Layout"
+        setSupportActionBar(toolBar)
+
+        val fragmentAdapter = MyPagerAdapter(supportFragmentManager)
+        viewPager.adapter = fragmentAdapter
+
+        tabLayout.setupWithViewPager(viewPager)
+
         recycler_view.layoutManager = LinearLayoutManager(this)
         getJson()
 
@@ -27,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     fun getJson() {
 
-        val url = "http://dnu5embx6omws.cloudfront.net/venues/weather.json"
+//        val url = "http://dnu5embx6omws.cloudfront.net/venues/weather.json"
 
         val request = Request.Builder().url(getString(R.string.SERVER_URL)).build()
 
