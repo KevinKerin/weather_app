@@ -3,9 +3,6 @@ package com.example.weather_app
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,14 +18,15 @@ class MainActivity : AppCompatActivity() {
     lateinit var adapter: MyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         toolBar.title = "Tab Layout"
         setSupportActionBar(toolBar)
 
-        val fragmentAdapter = MyPagerAdapter(supportFragmentManager)
-        viewPager.adapter = fragmentAdapter
+//        val fragmentAdapter = MyPagerAdapter(recycler_view, venueList, supportFragmentManager)
+//        viewPager.adapter = fragmentAdapter
 
         tabLayout.setupWithViewPager(viewPager)
 
@@ -68,13 +66,13 @@ class MainActivity : AppCompatActivity() {
                             else -> venue.imageResource = R.drawable.ic_default
                         }
                     }
-                    if(venue._weatherTemp != null){
+                    if (venue._weatherTemp != null) {
                         venue._weatherTempInt = venue._weatherTemp.toInt()
                     }
                 }
 
                 runOnUiThread {
-                    adapter = MyAdapter(weatherData)
+                    adapter = MyAdapter(venueList)
                     recycler_view.adapter = adapter
                 }
             }
@@ -87,39 +85,37 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateView() {
-        val view = findViewById<RecyclerView>(R.id.recycler_view)
-        weatherData.data = venueList
-        adapter = MyAdapter(weatherData)
+        adapter = MyAdapter(venueList)
         recycler_view.adapter?.notifyDataSetChanged()
     }
 
-    fun sortAlphabetically(view: View){
-        venueList = venueList.sortedBy{it._name}
+    fun sortAlphabetically(view: View) {
+        venueList = venueList.sortedBy { it._name }
         updateView()
     }
 
 
-    fun sortAlphabeticallyDescending(view: View){
+    fun sortAlphabeticallyDescending(view: View) {
         venueList = venueList.sortedByDescending { it._name }
         updateView()
     }
 
-    fun sortByTemperature(view: View){
+    fun sortByTemperature(view: View) {
         venueList = venueList.sortedBy { it._weatherTempInt }
         updateView()
     }
 
-    fun sortByTemperatureDescending(view: View){
+    fun sortByTemperatureDescending(view: View) {
         venueList = venueList.sortedByDescending { it._weatherTempInt }
         updateView()
     }
 
-    fun sortByLastUpdated(view: View){
+    fun sortByLastUpdated(view: View) {
         venueList = venueList.sortedBy { it._weatherTempInt }
         updateView()
     }
 
-    fun sortByLastUpdatedDescending(view: View){
+    fun sortByLastUpdatedDescending(view: View) {
         venueList = venueList.sortedByDescending { it._weatherLastUpdated }
         updateView()
     }
