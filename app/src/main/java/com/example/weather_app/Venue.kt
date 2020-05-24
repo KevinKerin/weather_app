@@ -1,6 +1,7 @@
 package com.example.weather_app
 
 import java.io.Serializable
+import java.util.*
 
 class Venue(val _venueId: String,
             val _name: String,
@@ -13,5 +14,6 @@ class Venue(val _venueId: String,
             var _weatherTempInt: Int,
             val _weatherFeelsLike: String,
             val _sport: Sport,
-            val _weatherLastUpdated: String,
-            var imageResource: Int = 0) : Serializable
+            val _weatherLastUpdated: Long,
+            var dateString: String,
+            var imageResource: Int) : Serializable
