@@ -17,7 +17,7 @@
             android:src="@drawable/ic_sun" />
 
         <TextView
-            android:id="@+id/text_view_1"
+            android:id="@+id/venue_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/image_view"
@@ -27,15 +27,15 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/text_view_2"
+            android:id="@+id/country_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_view_1"
+            android:layout_below="@id/venue_text_view"
             android:layout_toEndOf="@id/image_view"
             android:text="Line 2" />
 
         <TextView
-            android:id="@+id/text_view_3"
+            android:id="@+id/weather_condition_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

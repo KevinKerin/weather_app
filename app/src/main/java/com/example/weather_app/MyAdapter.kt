@@ -49,9 +49,9 @@ class ViewHolder(itemView: View, var venue: Venue? = null) : RecyclerView.ViewHo
     }
 
     val imageView: ImageView = itemView.image_view
-    val textView1: TextView = itemView.text_view_1
-    val textView2: TextView = itemView.text_view_2
-    val textView3: TextView = itemView.text_view_3
+    val textView1: TextView = itemView.venue_text_view
+    val textView2: TextView = itemView.country_text_view
+    val textView3: TextView = itemView.weather_condition_text_view
 
     init {
         itemView.setOnClickListener {

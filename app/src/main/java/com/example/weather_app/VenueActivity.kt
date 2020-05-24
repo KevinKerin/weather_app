@@ -6,10 +6,6 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
-import java.util.*
 
 class VenueActivity : AppCompatActivity() {
 
@@ -32,11 +28,11 @@ class VenueActivity : AppCompatActivity() {
 
         val venue = intent.getSerializableExtra(MyAdapter.ViewHolder.VENUE_KEY) as? Venue
 
-        val textView1: TextView = findViewById(R.id.text_view_1)
-        val textView2: TextView = findViewById(R.id.text_view_2)
-        val textView3: TextView = findViewById(R.id.text_view_3)
-        val textView4: TextView = findViewById(R.id.text_view_4)
-        val textView5: TextView = findViewById(R.id.text_view_5)
+        val textView1: TextView = findViewById(R.id.venue_text_view)
+        val textView2: TextView = findViewById(R.id.country_text_view)
+        val textView3: TextView = findViewById(R.id.weather_condition_text_view)
+        val textView4: TextView = findViewById(R.id.temperature_text_view)
+        val textView5: TextView = findViewById(R.id.last_updated_text_view)
         val imageView: ImageView = findViewById(R.id.image_view)
 
         textView1.text = venue?._name

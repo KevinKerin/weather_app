@@ -40,6 +40,10 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:padding="4dp"
-        tools:listitem="@layout/item" />
+        tools:listitem="@layout/item">
+
+        
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
