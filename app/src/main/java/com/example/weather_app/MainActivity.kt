@@ -25,13 +25,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        toolBar.title = "Tab Layout"
-        setSupportActionBar(toolBar)
+//        toolBar.title = "Tab Layout"
+//        setSupportActionBar(toolBar)
 
 //        val fragmentAdapter = MyPagerAdapter(recycler_view, venueList, supportFragmentManager)
 //        viewPager.adapter = fragmentAdapter
 
-        tabLayout.setupWithViewPager(viewPager)
+//        tabLayout.setupWithViewPager(viewPager)
 
         recycler_view.layoutManager = LinearLayoutManager(this)
         getJson()
@@ -72,8 +72,9 @@ class MainActivity : AppCompatActivity() {
                     if (venue._weatherTemp != null) {
                         venue._weatherTempInt = venue._weatherTemp.toInt()
                     }
-                    if (venue._weatherLastUpdated != null){
-                        venue.dateString = dateFormatter.format(Date(venue._weatherLastUpdated * 1000L))
+                    if (venue._weatherLastUpdated != null) {
+                        venue.dateString =
+                            dateFormatter.format(Date(venue._weatherLastUpdated * 1000L))
                     }
                 }
 
@@ -91,15 +92,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateView() {
+        val view = findViewById<RecyclerView>(R.id.recycler_view)
         adapter = MyAdapter(venueList)
-        recycler_view.adapter?.notifyDataSetChanged()
+        view.adapter?.notifyDataSetChanged()
     }
 
     fun sortAlphabetically(view: View) {
         venueList = venueList.sortedBy { it._name }
         updateView()
     }
-
 
     fun sortAlphabeticallyDescending(view: View) {
         venueList = venueList.sortedByDescending { it._name }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">weather_app</string>
+    <string name="app_name">Weather App</string>
     <string name="SERVER_URL">http://dnu5embx6omws.cloudfront.net/venues/weather.json</string>
 
     <!-- TODO: Remove or change this placeholder text -->

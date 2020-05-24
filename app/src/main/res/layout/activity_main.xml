@@ -6,43 +6,75 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:id="@+id/toolBar"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/Base.Theme.AppCompat.Light" />
+    <!--    <com.google.android.material.appbar.AppBarLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content">-->
+    <!--        <androidx.appcompat.widget.Toolbar-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="?attr/actionBarSize"-->
+    <!--            android:id="@+id/toolBar"-->
+    <!--            android:background="?attr/colorPrimary"-->
+    <!--            app:layout_scrollFlags="scroll|enterAlways"-->
+    <!--            app:popupTheme="@style/Base.Theme.AppCompat.Light" />-->
 
-        <com.google.android.material.tabs.TabLayout
-            android:layout_width="match_parent"
+    <!--        <com.google.android.material.tabs.TabLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:id="@+id/tabLayout"-->
+    <!--            app:tabMode="fixed"-->
+    <!--            app:tabMaxWidth="0dp"-->
+    <!--            app:tabGravity="fill"-->
+    <!--            app:tabIndicatorColor="#ffffff"-->
+    <!--            app:tabTextColor="#ffffff"/>-->
+    <!--    </com.google.android.material.appbar.AppBarLayout>-->
+
+    <!--    <androidx.viewpager.widget.ViewPager-->
+    <!--        android:id="@+id/viewPager"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        app:layout_behavior="@string/appbar_scrolling_view_behavior" >-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/a_to_z_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tabLayout"
-            app:tabMode="fixed"
-            app:tabMaxWidth="0dp"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="#ffffff"
-            app:tabTextColor="#ffffff"/>
-    </com.google.android.material.appbar.AppBarLayout>
+            android:onClick="sortAlphabetically"
+            android:layout_weight="1"
+            android:text="A-Z" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        <Button
+            android:id="@+id/temp_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="sortByTemperatureDescending"
+            android:text="TEMPERATURE" />
+
+        <Button
+            android:id="@+id/last_updated_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="sortByLastUpdatedDescending"
+            android:layout_weight="1"
+            android:text="LAST UPDATED" />
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="55dp"
         android:clipToPadding="false"
         android:padding="4dp"
         tools:listitem="@layout/item">
 
-        
 
     </androidx.recyclerview.widget.RecyclerView>
 

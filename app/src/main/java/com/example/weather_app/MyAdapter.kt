@@ -27,55 +27,31 @@ class MyAdapter(private val venueList: List<Venue>) : RecyclerView.Adapter<MyAda
         holder?.venue = currentItem
     }
 
-    override fun getItemCount(): Int{
+    override fun getItemCount(): Int {
         return venueList.size
     }
 
-class ViewHolder(itemView: View, var venue: Venue? = null) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, var venue: Venue? = null) : RecyclerView.ViewHolder(itemView) {
 
-    companion object {
-        val VENUE_KEY = "VENUE_KEY"
-        val VENUE_NAME_KEY = "VENUE_NAME"
-        val VENUE_ID_KEY = "VENUE_ID"
-        val VENUE_COUNTRY_NAME_KEY = "VENUE_COUNTRY_NAME_KEY"
-        val VENUE_WEATHER_CONDITION_KEY = "VENUE_WEATHER_CONDITION_KEY"
-        val VENUE_WEATHER_CONDITION_ICON_KEY = "VENUE_WEATHER_CONDITION_ICON_KEY"
-        val VENUE_WEATHER_WIND_KEY = "VENUE_WEATHER_WIND_KEY"
-        val VENUE_WEATHER_HUMIDITY_KEY = "VENUE_WEATHER_HUMIDITY_KEY"
-        val VENUE_WEATHER_TEMP_KEY = "VENUE_WEATHER_TEMP_KEY"
-        val VENUE_WEATHER_FEELS_LIKE_KEY = "VENUE_WEATHER_FEELS_LIKE_KEY"
-        val VENUE_WEATHER_LAST_UPDATED_KEY = "VENUE_WEATHER_LAST_UPDATED_KEY"
-        val VENUE_IMAGE_RESOURCE = "VENUE_IMAGE_RESOURCE"
-    }
+        companion object {
+            val VENUE_KEY = "VENUE_KEY"
+        }
 
-    val imageView: ImageView = itemView.image_view
-    val textView1: TextView = itemView.venue_text_view
-    val textView2: TextView = itemView.country_text_view
-    val textView3: TextView = itemView.weather_condition_text_view
+        val imageView: ImageView = itemView.image_view
+        val textView1: TextView = itemView.venue_text_view
+        val textView2: TextView = itemView.country_text_view
+        val textView3: TextView = itemView.weather_condition_text_view
 
-    init {
-        itemView.setOnClickListener {
+        init {
+            itemView.setOnClickListener {
 
-            val intent =  Intent(itemView.context, VenueActivity::class.java)
+                val intent = Intent(itemView.context, VenueActivity::class.java)
 
-//            intent.putStringArrayListExtra()
-//            intent.putExtra(VENUE_NAME_KEY, venue?._name)
-//            intent.putExtra(VENUE_ID_KEY, venue?._venueId)
-//            intent.putExtra(VENUE_COUNTRY_NAME_KEY, venue?._country?._name)
-//            intent.putExtra(VENUE_WEATHER_CONDITION_KEY, venue?._weatherCondition)
-//            intent.putExtra(VENUE_WEATHER_CONDITION_ICON_KEY, venue?._weatherConditionIcon)
-//            intent.putExtra(VENUE_WEATHER_WIND_KEY, venue?._weatherWind)
-//            intent.putExtra(VENUE_WEATHER_HUMIDITY_KEY, venue?._weatherHumidity)
-//            intent.putExtra(VENUE_WEATHER_TEMP_KEY, venue?._weatherTemp)
-//            intent.putExtra(VENUE_WEATHER_FEELS_LIKE_KEY, venue?._weatherFeelsLike)
-//            intent.putExtra(VENUE_WEATHER_LAST_UPDATED_KEY, venue?._weatherLastUpdated)
-//            intent.putExtra(VENUE_IMAGE_RESOURCE, venue?.imageResource)
-            intent.putExtra(VENUE_KEY, venue)
+                intent.putExtra(VENUE_KEY, venue)
 
-            itemView.context.startActivity(intent)
+                itemView.context.startActivity(intent)
+            }
         }
     }
-
-}
 
 }
