@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var weatherData: WeatherData
     lateinit var venueList: List<Venue>
     lateinit var adapter: MyAdapter
+    var reverseToggle: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -94,37 +96,31 @@ class MainActivity : AppCompatActivity() {
     private fun updateView() {
         val view = findViewById<RecyclerView>(R.id.recycler_view)
         adapter = MyAdapter(venueList)
-        view.adapter?.notifyDataSetChanged()
+        view.adapter = adapter
+    }
+
+    fun reverseOrder(view: View){
+        reverseToggle = !reverseToggle
+        venueList = venueList.reversed()
+        updateView()
     }
 
     fun sortAlphabetically(view: View) {
-        venueList = venueList.sortedBy { it._name }
+        venueList = if(reverseToggle) venueList.sortedByDescending { it._name } else venueList.sortedBy { it._name }
         updateView()
     }
 
-    fun sortAlphabeticallyDescending(view: View) {
-        venueList = venueList.sortedByDescending { it._name }
-        updateView()
-    }
 
     fun sortByTemperature(view: View) {
-        venueList = venueList.sortedBy { it._weatherTempInt }
+        venueList = if(reverseToggle) venueList.sortedBy { it._weatherTempInt } else venueList.sortedByDescending { it._weatherTempInt }
         updateView()
     }
 
-    fun sortByTemperatureDescending(view: View) {
-        venueList = venueList.sortedByDescending { it._weatherTempInt }
-        updateView()
-    }
 
     fun sortByLastUpdated(view: View) {
-        venueList = venueList.sortedBy { it._weatherTempInt }
+        venueList = if(reverseToggle) venueList.sortedBy { it._weatherLastUpdated } else venueList.sortedByDescending { it._weatherLastUpdated }
         updateView()
     }
 
-    fun sortByLastUpdatedDescending(view: View) {
-        venueList = venueList.sortedByDescending { it._weatherLastUpdated }
-        updateView()
-    }
 
 }

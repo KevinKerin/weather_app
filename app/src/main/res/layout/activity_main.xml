@@ -6,34 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!--    <com.google.android.material.appbar.AppBarLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content">-->
-    <!--        <androidx.appcompat.widget.Toolbar-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="?attr/actionBarSize"-->
-    <!--            android:id="@+id/toolBar"-->
-    <!--            android:background="?attr/colorPrimary"-->
-    <!--            app:layout_scrollFlags="scroll|enterAlways"-->
-    <!--            app:popupTheme="@style/Base.Theme.AppCompat.Light" />-->
-
-    <!--        <com.google.android.material.tabs.TabLayout-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:id="@+id/tabLayout"-->
-    <!--            app:tabMode="fixed"-->
-    <!--            app:tabMaxWidth="0dp"-->
-    <!--            app:tabGravity="fill"-->
-    <!--            app:tabIndicatorColor="#ffffff"-->
-    <!--            app:tabTextColor="#ffffff"/>-->
-    <!--    </com.google.android.material.appbar.AppBarLayout>-->
-
-    <!--    <androidx.viewpager.widget.ViewPager-->
-    <!--        android:id="@+id/viewPager"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        app:layout_behavior="@string/appbar_scrolling_view_behavior" >-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
@@ -53,16 +25,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="sortByTemperatureDescending"
+            android:onClick="sortByTemperature"
             android:text="TEMPERATURE" />
 
         <Button
             android:id="@+id/last_updated_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="sortByLastUpdatedDescending"
+            android:onClick="sortByLastUpdated"
             android:layout_weight="1"
             android:text="LAST UPDATED" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="18dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="reverseOrder"
+            app:srcCompat="@drawable/toggle" />
+
 
     </LinearLayout>
 
