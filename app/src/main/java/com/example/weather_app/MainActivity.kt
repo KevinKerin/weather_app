@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
@@ -121,6 +122,12 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    fun refresh(view: View){
+        getJson()
+        spinner.setSelection(0)
+        Toast.makeText(applicationContext,"App Refreshed",Toast.LENGTH_SHORT).show()
     }
 
     private fun updateView() {

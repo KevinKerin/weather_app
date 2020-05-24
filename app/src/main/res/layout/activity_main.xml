@@ -16,8 +16,8 @@
             android:id="@+id/a_to_z_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="sortAlphabetically"
             android:layout_weight="1"
+            android:onClick="sortAlphabetically"
             android:text="A-Z" />
 
         <Button
@@ -32,8 +32,8 @@
             android:id="@+id/last_updated_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="sortByLastUpdated"
             android:layout_weight="1"
+            android:onClick="sortByLastUpdated"
             android:text="LAST UPDATED" />
 
         <ImageView
@@ -54,16 +54,28 @@
         android:layout_marginTop="55dp"
         android:clipToPadding="false"
         android:padding="4dp"
-        tools:listitem="@layout/item">
+        tools:listitem="@layout/item" />
 
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <Spinner
-        android:id="@+id/spinner"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="53dp"
+        android:layout_height="55dp"
         android:layout_gravity="bottom"
-        android:padding="5dp" />
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="370dp"
+            android:layout_height="match_parent"
+            android:padding="5dp" />
+
+        <ImageView
+            android:id="@+id/refresh"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="refresh"
+            app:srcCompat="@drawable/refresh"
+            android:layout_width="20dp" />
+
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
