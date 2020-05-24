@@ -2,9 +2,10 @@ package com.example.weather_app
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.TextView
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
@@ -13,27 +14,50 @@ import okhttp3.*
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var weatherData: WeatherData
-    lateinit var venueList: List<Venue>
     lateinit var adapter: MyAdapter
+    var jsonResponseComplete = false
+    var venueList: List<Venue>? = null
+    var filteredVenueList: List<Venue>? = null
+    var countryList: MutableList<String> = ArrayList<String>()
     var reverseToggle: Boolean = false
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        var spinner: Spinner = findViewById(R.id.spinner)
+        countryList.add("All")
 
-//        toolBar.title = "Tab Layout"
-//        setSupportActionBar(toolBar)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, countryList)
+        spinner.adapter = adapter
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
 
-//        val fragmentAdapter = MyPagerAdapter(recycler_view, venueList, supportFragmentManager)
-//        viewPager.adapter = fragmentAdapter
-
-//        tabLayout.setupWithViewPager(viewPager)
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if(jsonResponseComplete){
+                    if (position == 0 && venueList != null) {
+                        filteredVenueList = venueList
+                        updateView()
+                        return
+                    }
+                    val selectedCountry = countryList[position]
+                    filteredVenueList = venueList?.filter { it._country._name == selectedCountry }
+                    val view = findViewById<RecyclerView>(R.id.recycler_view)
+                    view.adapter = MyAdapter(filteredVenueList!!)
+                }
+            }
+        }
 
         recycler_view.layoutManager = LinearLayoutManager(this)
         getJson()
@@ -55,10 +79,11 @@ class MainActivity : AppCompatActivity() {
                 weatherData = gson.fromJson(body, WeatherData::class.java)
 
                 venueList = weatherData.data
+                filteredVenueList = venueList
 
                 val dateFormatter: SimpleDateFormat = SimpleDateFormat("EEE MMM d yyyy, h:mm a")
 
-                for (venue in venueList) {
+                for (venue in venueList!!) {
                     if (venue._weatherConditionIcon != null) {
                         when (venue._weatherConditionIcon) {
                             "clear" -> venue.imageResource = R.drawable.ic_sun
@@ -78,11 +103,16 @@ class MainActivity : AppCompatActivity() {
                         venue.dateString =
                             dateFormatter.format(Date(venue._weatherLastUpdated * 1000L))
                     }
+                    val countryName = venue._country._name
+                    if (!countryList.contains(countryName)) {
+                        countryList.add(countryName)
+                    }
                 }
 
                 runOnUiThread {
-                    adapter = MyAdapter(venueList)
+                    adapter = MyAdapter(venueList!!)
                     recycler_view.adapter = adapter
+                    jsonResponseComplete = true
                 }
             }
 
@@ -95,30 +125,31 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateView() {
         val view = findViewById<RecyclerView>(R.id.recycler_view)
-        adapter = MyAdapter(venueList)
+        adapter = filteredVenueList?.let { MyAdapter(it) }!!
         view.adapter = adapter
     }
 
-    fun reverseOrder(view: View){
+    fun reverseOrder(view: View) {
         reverseToggle = !reverseToggle
-        venueList = venueList.reversed()
+        filteredVenueList = filteredVenueList?.reversed()
         updateView()
     }
 
     fun sortAlphabetically(view: View) {
-        venueList = if(reverseToggle) venueList.sortedByDescending { it._name } else venueList.sortedBy { it._name }
+        filteredVenueList =
+            if (reverseToggle) filteredVenueList?.sortedByDescending { it._name } else filteredVenueList?.sortedBy { it._name }
         updateView()
     }
-
 
     fun sortByTemperature(view: View) {
-        venueList = if(reverseToggle) venueList.sortedBy { it._weatherTempInt } else venueList.sortedByDescending { it._weatherTempInt }
+        filteredVenueList =
+            if (reverseToggle) filteredVenueList?.sortedBy { it._weatherTempInt } else filteredVenueList?.sortedByDescending { it._weatherTempInt }
         updateView()
     }
 
-
     fun sortByLastUpdated(view: View) {
-        venueList = if(reverseToggle) venueList.sortedBy { it._weatherLastUpdated } else venueList.sortedByDescending { it._weatherLastUpdated }
+        filteredVenueList =
+            if (reverseToggle) filteredVenueList?.sortedBy { it._weatherLastUpdated } else filteredVenueList?.sortedByDescending { it._weatherLastUpdated }
         updateView()
     }
 
