@@ -1,4 +1,4 @@
-package com.example.weather_app
+package adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weather_app.R
+import activity.VenueActivity
 import kotlinx.android.synthetic.main.item.view.*
+import model.Venue
 
 class MyAdapter(private val venueList: List<Venue>) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
@@ -34,11 +37,6 @@ class MyAdapter(private val venueList: List<Venue>) : RecyclerView.Adapter<MyAda
             holder.temperatureTextView.text = null
             holder.lastUpdatedListTextView.text = " "
         }
-//        if(!currentItem.dateMainActivityString.equals("")){
-//
-//        } else {
-//            holder.lastUpdatedListTextView.text = null
-//        }
         holder?.venue = currentItem
     }
 
@@ -55,7 +53,7 @@ class MyAdapter(private val venueList: List<Venue>) : RecyclerView.Adapter<MyAda
         val imageView: ImageView = itemView.image_view
         val venueTextView: TextView = itemView.venue_text_view
         val weatherConditionTextView: TextView = itemView.country_text_view
-        val temperatureTextView: TextView = itemView.weather_condition_text_view
+        val temperatureTextView: TextView = itemView.temperature_text_view
         val lastUpdatedListTextView: TextView = itemView.last_updated_list_text_view
 
         init {

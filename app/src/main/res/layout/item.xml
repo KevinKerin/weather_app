@@ -22,8 +22,11 @@
             android:id="@+id/venue_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:layout_above="@id/country_text_view"
             android:layout_alignTop="@id/image_view"
+            android:layout_toLeftOf="@id/temperature_text_view"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/image_view"
             android:text="@string/venue_text_view"
@@ -52,7 +55,7 @@
             android:textSize="10sp" />
 
         <TextView
-            android:id="@+id/weather_condition_text_view"
+            android:id="@+id/temperature_text_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignTop="@id/image_view"

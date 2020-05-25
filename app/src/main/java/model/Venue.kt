@@ -1,7 +1,6 @@
-package com.example.weather_app
+package model
 
 import java.io.Serializable
-import java.util.*
 
 class Venue(val _venueId: String,
             val _name: String,

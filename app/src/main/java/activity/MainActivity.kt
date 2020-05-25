@@ -1,5 +1,7 @@
-package com.example.weather_app
+package activity
 
+import adapter.MyAdapter
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.animation.RotateAnimation
@@ -7,8 +9,11 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weather_app.R
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
+import model.Venue
+import model.WeatherData
 import okhttp3.*
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -20,6 +25,11 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var weatherData: WeatherData
     lateinit var adapter: MyAdapter
+    lateinit var aToZButton: Button
+    lateinit var tempButton: Button
+    lateinit var lastUpdatedButton: Button
+    lateinit var buttonList: List<Button>
+
     var jsonResponseComplete = false
     var venueList: List<Venue>? = null
     var filteredVenueList: List<Venue>? = null
@@ -32,6 +42,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         var spinner: Spinner = findViewById(R.id.spinner)
         countryList.add("All")
+
+        aToZButton = findViewById(R.id.a_to_z_button)
+        tempButton = findViewById(R.id.temp_button)
+        lastUpdatedButton = findViewById(R.id.last_updated_button)
+        buttonList = listOf(aToZButton, tempButton, lastUpdatedButton)
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, countryList)
         spinner.adapter = adapter
@@ -53,8 +68,8 @@ class MainActivity : AppCompatActivity() {
                     }
                     val selectedCountry = countryList[position]
                     filteredVenueList = venueList?.filter { it._country._name == selectedCountry }
-                    val view = findViewById<RecyclerView>(R.id.recycler_view)
-                    view.adapter = MyAdapter(filteredVenueList!!)
+                    val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
+                    recyclerView.adapter = MyAdapter(filteredVenueList!!)
                 }
             }
         }
@@ -72,7 +87,7 @@ class MainActivity : AppCompatActivity() {
 
         client.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call, response: Response) {
-                val body = response?.body?.string()
+                val body = response.body?.string()
 
                 val gson = GsonBuilder().create()
 
@@ -81,22 +96,31 @@ class MainActivity : AppCompatActivity() {
                 venueList = weatherData.data
                 filteredVenueList = venueList
 
-                val venueActivityFormatter: SimpleDateFormat =
+                val venueActivityFormatter =
                     SimpleDateFormat("EEE MMM d yyyy, h:mm a")
-                val mainActivityFormatter: SimpleDateFormat = SimpleDateFormat("hh:mm MMM d yyyy")
+                val mainActivityFormatter = SimpleDateFormat("hh:mm MMM d yyyy")
 
                 for (venue in venueList!!) {
                     if (venue._weatherConditionIcon != null) {
                         when (venue._weatherConditionIcon) {
-                            "clear" -> venue.imageResource = R.drawable.clear
-                            "fog" -> venue.imageResource = R.drawable.fog
-                            "cloudy", "mostlycloudy" -> venue.imageResource = R.drawable.cloudy
-                            "partlycloudy" -> venue.imageResource = R.drawable.partlycloudy
-                            "tstorms" -> venue.imageResource = R.drawable.storm
-                            "rain" -> venue.imageResource = R.drawable.rain
-                            "snow" -> venue.imageResource = R.drawable.snow
-                            "hazy" -> venue.imageResource = R.drawable.hazy
-                            else -> venue.imageResource = R.drawable.clear
+                            "clear" -> venue.imageResource =
+                                R.drawable.clear
+                            "fog" -> venue.imageResource =
+                                R.drawable.fog
+                            "cloudy", "mostlycloudy" -> venue.imageResource =
+                                R.drawable.cloudy
+                            "partlycloudy" -> venue.imageResource =
+                                R.drawable.partlycloudy
+                            "tstorms" -> venue.imageResource =
+                                R.drawable.storm
+                            "rain" -> venue.imageResource =
+                                R.drawable.rain
+                            "snow" -> venue.imageResource =
+                                R.drawable.snow
+                            "hazy" -> venue.imageResource =
+                                R.drawable.hazy
+                            else -> venue.imageResource =
+                                R.drawable.clear
                         }
                     }
                     if (venue._weatherTemp != null) {
@@ -141,15 +165,28 @@ class MainActivity : AppCompatActivity() {
         image.startAnimation(anim)
 
 
+        setButtonAsActive(null)
         getJson()
         spinner.setSelection(0)
         Toast.makeText(applicationContext, "App Refreshed", Toast.LENGTH_SHORT).show()
     }
 
+    fun setButtonAsActive(button: Button?){
+        for (currentButton in buttonList){
+            if (button == currentButton){
+                currentButton.setBackgroundColor(Color.BLACK)
+                currentButton.setTextColor(Color.WHITE)
+            } else {
+                currentButton.setBackgroundColor(Color.WHITE)
+                currentButton.setTextColor(Color.BLACK)
+            }
+        }
+    }
+
     private fun updateView() {
-        val view = findViewById<RecyclerView>(R.id.recycler_view)
+        val updatedView = findViewById<RecyclerView>(R.id.recycler_view)
         adapter = filteredVenueList?.let { MyAdapter(it) }!!
-        view.adapter = adapter
+        updatedView.adapter = adapter
     }
 
     fun reverseOrder(view: View) {
@@ -162,18 +199,21 @@ class MainActivity : AppCompatActivity() {
         filteredVenueList =
             if (reverseToggle) filteredVenueList?.sortedByDescending { it._name } else filteredVenueList?.sortedBy { it._name }
         updateView()
+        setButtonAsActive(aToZButton)
     }
 
     fun sortByTemperature(view: View) {
         filteredVenueList =
             if (reverseToggle) filteredVenueList?.sortedBy { it._weatherTempInt } else filteredVenueList?.sortedByDescending { it._weatherTempInt }
         updateView()
+        setButtonAsActive(tempButton)
     }
 
     fun sortByLastUpdated(view: View) {
         filteredVenueList =
             if (reverseToggle) filteredVenueList?.sortedBy { it._weatherLastUpdated } else filteredVenueList?.sortedByDescending { it._weatherLastUpdated }
         updateView()
+        setButtonAsActive(lastUpdatedButton)
     }
 
 

@@ -1,4 +1,4 @@
-package com.example.weather_app
+package model
 
 class WeatherData(
     val ret: Boolean,

@@ -4,28 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="activity.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
-        android:padding="4dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="4dp">
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_weight=".85"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_width="0dp" />
+            android:layout_weight=".85" />
 
         <ImageView
             android:id="@+id/refresh"
             android:layout_width="0dp"
-            android:layout_weight="0.1"
             android:layout_height="35dp"
+            android:layout_weight="0.1"
             android:onClick="refresh"
             app:srcCompat="@drawable/refresh3" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginTop="55dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/a_to_z_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".15"
+            android:background="@android:color/white"
+            android:onClick="sortAlphabetically"
+            android:text="A-Z"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/temp_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".15"
+            android:background="@android:color/white"
+            android:onClick="sortByTemperature"
+            android:text="TEMPERATURE"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/last_updated_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".15"
+            android:background="@android:color/white"
+            android:onClick="sortByLastUpdated"
+            android:text="LAST UPDATED"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="18dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".5"
+            android:onClick="reverseOrder"
+            app:srcCompat="@drawable/toggle" />
 
     </LinearLayout>
 
@@ -33,53 +83,10 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="45dp"
-        android:layout_marginBottom="55dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="0dp"
         android:clipToPadding="false"
         android:padding="4dp"
         tools:listitem="@layout/item" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="bottom">
-
-        <Button
-            android:id="@+id/a_to_z_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:onClick="sortAlphabetically"
-            android:text="A-Z"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/temp_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:onClick="sortByTemperature"
-            android:text="TEMPERATURE"
-            android:textSize="12sp" />
-
-        <Button
-            android:id="@+id/last_updated_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:onClick="sortByLastUpdated"
-            android:text="LAST UPDATED"
-            android:textSize="12sp" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="18dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".2"
-            android:onClick="reverseOrder"
-            app:srcCompat="@drawable/toggle" />
-
-    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

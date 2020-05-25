@@ -1,12 +1,14 @@
-package com.example.weather_app
+package activity
 
+import adapter.MyAdapter
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import org.w3c.dom.Text
+import com.example.weather_app.R
+import model.Venue
 
 class VenueActivity : AppCompatActivity() {
 
@@ -19,7 +21,7 @@ class VenueActivity : AppCompatActivity() {
 
         val venueTextView: TextView = findViewById(R.id.venue_text_view)
         val countryTextView: TextView = findViewById(R.id.country_text_view)
-        val weatherConditionTextView: TextView = findViewById(R.id.weather_condition_text_view)
+        val weatherConditionTextView: TextView = findViewById(R.id.temperature_text_view)
         val windTextView: TextView = findViewById(R.id.wind_text_view)
         val humidityTextView: TextView = findViewById(R.id.humidity_text_view)
         val tempTextView: TextView = findViewById(R.id.temp_text_view)
