@@ -2,9 +2,16 @@
     <string name="app_name">Weather App</string>
     <string name="server_url">http://dnu5embx6omws.cloudfront.net/venues/weather.json</string>
     <string name="venue_text_view">Killarney</string>
+    <string name="country_text_view">Ireland</string>
     <string name="weather_condition_text_view">Clear</string>
     <string name="temperature_text_view">11°</string>
     <string name="weather_image_view_content_description">Weather Condition Icon</string>
     <string name="last_updated_list_text_view">Updated 12:52 Oct 12 2014</string>
+    <string name="last_updated_venue_text_view">Last Updated: Tue Oct 12 2014, 12.50pm</string>
+
+    <string name="wind_text_view">Wind: SE at 15kph</string>
+    <string name="humidity_text_view">Humidity: 57%</string>
+    <string name="temp_text_view">Temperature: 16°</string>
+    <string name="temp_feels_like_text_view">Feels like: 17°</string>
 
 </resources>

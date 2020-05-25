@@ -54,8 +54,8 @@ class MyAdapter(private val venueList: List<Venue>) : RecyclerView.Adapter<MyAda
 
         val imageView: ImageView = itemView.image_view
         val venueTextView: TextView = itemView.venue_text_view
-        val weatherConditionTextView: TextView = itemView.weather_condition_text_view
-        val temperatureTextView: TextView = itemView.temperature_text_view
+        val weatherConditionTextView: TextView = itemView.country_text_view
+        val temperatureTextView: TextView = itemView.weather_condition_text_view
         val lastUpdatedListTextView: TextView = itemView.last_updated_list_text_view
 
         init {
