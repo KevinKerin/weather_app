@@ -8,73 +8,77 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:padding="4dp"
         android:orientation="horizontal">
 
-
-        <Button
-            android:id="@+id/a_to_z_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="sortAlphabetically"
-            android:text="A-Z" />
-
-        <Button
-            android:id="@+id/temp_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="sortByTemperature"
-            android:text="TEMPERATURE" />
-
-        <Button
-            android:id="@+id/last_updated_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="sortByLastUpdated"
-            android:text="LAST UPDATED" />
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_weight=".85"
+            android:layout_height="match_parent"
+            android:layout_width="0dp" />
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="18dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="reverseOrder"
-            app:srcCompat="@drawable/toggle" />
-
+            android:id="@+id/refresh"
+            android:layout_width="0dp"
+            android:layout_weight="0.1"
+            android:layout_height="35dp"
+            android:onClick="refresh"
+            app:srcCompat="@drawable/refresh3" />
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="496dp"
-        android:layout_marginTop="55dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="55dp"
         android:clipToPadding="false"
         android:padding="4dp"
         tools:listitem="@layout/item" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom">
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="370dp"
-            android:layout_height="match_parent"
-            android:padding="5dp" />
+        <Button
+            android:id="@+id/a_to_z_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:onClick="sortAlphabetically"
+            android:text="A-Z"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/temp_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:onClick="sortByTemperature"
+            android:text="TEMPERATURE"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/last_updated_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:onClick="sortByLastUpdated"
+            android:text="LAST UPDATED"
+            android:textSize="12sp" />
 
         <ImageView
-            android:id="@+id/refresh"
+            android:id="@+id/imageView"
+            android:layout_width="18dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="refresh"
-            app:srcCompat="@drawable/refresh"
-            android:layout_width="20dp" />
+            android:layout_weight=".2"
+            android:onClick="reverseOrder"
+            app:srcCompat="@drawable/toggle" />
 
     </LinearLayout>
 

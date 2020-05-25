@@ -1,12 +1,10 @@
 package com.example.weather_app
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
+import android.view.animation.RotateAnimation
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
@@ -16,6 +14,7 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         var spinner: Spinner = findViewById(R.id.spinner)
         countryList.add("All")
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, countryList)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, countryList)
         spinner.adapter = adapter
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -46,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                if(jsonResponseComplete){
+                if (jsonResponseComplete) {
                     if (position == 0 && venueList != null) {
                         filteredVenueList = venueList
                         updateView()
@@ -67,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 
     fun getJson() {
 
-        val request = Request.Builder().url(getString(R.string.SERVER_URL)).build()
+        val request = Request.Builder().url(getString(R.string.server_url)).build()
 
         val client = OkHttpClient()
 
@@ -82,27 +81,32 @@ class MainActivity : AppCompatActivity() {
                 venueList = weatherData.data
                 filteredVenueList = venueList
 
-                val dateFormatter: SimpleDateFormat = SimpleDateFormat("EEE MMM d yyyy, h:mm a")
+                val venueActivityFormatter: SimpleDateFormat =
+                    SimpleDateFormat("EEE MMM d yyyy, h:mm a")
+                val mainActivityFormatter: SimpleDateFormat = SimpleDateFormat("hh:mm MMM d yyyy")
 
                 for (venue in venueList!!) {
                     if (venue._weatherConditionIcon != null) {
                         when (venue._weatherConditionIcon) {
-                            "clear" -> venue.imageResource = R.drawable.ic_sun
-                            "fog" -> venue.imageResource = R.drawable.ic_default
-                            "cloudy" -> venue.imageResource = R.drawable.ic_cloud
-                            "partlycloudy" -> venue.imageResource = R.drawable.ic_cloud
-                            "rain" -> venue.imageResource = R.drawable.ic_rain
-                            "snow" -> venue.imageResource = R.drawable.ic_default
-                            "hazy" -> venue.imageResource = R.drawable.ic_default
-                            else -> venue.imageResource = R.drawable.ic_default
+                            "clear" -> venue.imageResource = R.drawable.clear
+                            "fog" -> venue.imageResource = R.drawable.fog
+                            "cloudy", "mostlycloudy" -> venue.imageResource = R.drawable.cloudy
+                            "partlycloudy" -> venue.imageResource = R.drawable.partlycloudy
+                            "tstorms" -> venue.imageResource = R.drawable.storm
+                            "rain" -> venue.imageResource = R.drawable.rain
+                            "snow" -> venue.imageResource = R.drawable.snow
+                            "hazy" -> venue.imageResource = R.drawable.hazy
+                            else -> venue.imageResource = R.drawable.clear
                         }
                     }
                     if (venue._weatherTemp != null) {
                         venue._weatherTempInt = venue._weatherTemp.toInt()
                     }
-                    if (venue._weatherLastUpdated != null) {
-                        venue.dateString =
-                            dateFormatter.format(Date(venue._weatherLastUpdated * 1000L))
+                    if (venue._weatherLastUpdated != 0L) {
+                        venue.dateVenueActivityString =
+                            venueActivityFormatter.format(Date(venue._weatherLastUpdated * 1000L))
+                        venue.dateMainActivityString =
+                            mainActivityFormatter.format(Date(venue._weatherLastUpdated * 1000L))
                     }
                     val countryName = venue._country._name
                     if (!countryList.contains(countryName)) {
@@ -124,10 +128,22 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun refresh(view: View){
+    fun refresh(view: View) {
+        val image: ImageView = findViewById(R.id.refresh)
+        image.clearAnimation()
+        val anim =
+            RotateAnimation(0F, 360F, (image.width / 2).toFloat(),
+                (image.height / 2).toFloat()
+            )
+        anim.fillAfter = true
+        anim.repeatCount = 0
+        anim.duration = 1000
+        image.startAnimation(anim)
+
+
         getJson()
         spinner.setSelection(0)
-        Toast.makeText(applicationContext,"App Refreshed",Toast.LENGTH_SHORT).show()
+        Toast.makeText(applicationContext, "App Refreshed", Toast.LENGTH_SHORT).show()
     }
 
     private fun updateView() {

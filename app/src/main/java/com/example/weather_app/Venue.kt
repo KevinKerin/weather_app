@@ -15,5 +15,6 @@ class Venue(val _venueId: String,
             val _weatherFeelsLike: String,
             val _sport: Sport,
             val _weatherLastUpdated: Long,
-            var dateString: String,
+            var dateMainActivityString: String,
+            var dateVenueActivityString: String,
             var imageResource: Int) : Serializable

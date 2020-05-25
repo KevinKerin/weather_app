@@ -20,10 +20,25 @@ class MyAdapter(private val venueList: List<Venue>) : RecyclerView.Adapter<MyAda
         val currentItem = venueList[position]
 
         holder.imageView.setImageResource(currentItem.imageResource)
-        holder.textView1.text = currentItem._name
-        holder.textView2.text = currentItem._weatherCondition
-        holder.textView3.text = currentItem._weatherTempInt.toString()
+        holder.venueTextView.text = currentItem._name
+        if(currentItem._weatherConditionIcon != null){
+            holder.weatherConditionTextView.text = currentItem._weatherCondition
 
+        } else {
+            holder.weatherConditionTextView.text = "No information available"
+        }
+        if(currentItem._weatherTemp != null){
+            holder.temperatureTextView.text = currentItem._weatherTempInt.toString() + "°"
+            holder.lastUpdatedListTextView.text = "Updated " + currentItem.dateMainActivityString
+        } else {
+            holder.temperatureTextView.text = null
+            holder.lastUpdatedListTextView.text = " "
+        }
+//        if(!currentItem.dateMainActivityString.equals("")){
+//
+//        } else {
+//            holder.lastUpdatedListTextView.text = null
+//        }
         holder?.venue = currentItem
     }
 
@@ -38,9 +53,10 @@ class MyAdapter(private val venueList: List<Venue>) : RecyclerView.Adapter<MyAda
         }
 
         val imageView: ImageView = itemView.image_view
-        val textView1: TextView = itemView.venue_text_view
-        val textView2: TextView = itemView.country_text_view
-        val textView3: TextView = itemView.weather_condition_text_view
+        val venueTextView: TextView = itemView.venue_text_view
+        val weatherConditionTextView: TextView = itemView.weather_condition_text_view
+        val temperatureTextView: TextView = itemView.temperature_text_view
+        val lastUpdatedListTextView: TextView = itemView.last_updated_list_text_view
 
         init {
             itemView.setOnClickListener {
