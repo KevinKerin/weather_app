@@ -1,4 +1,4 @@
-package model
+package com.kevinkerin.weather_app.model
 
 class WeatherData(
     val ret: Boolean,
