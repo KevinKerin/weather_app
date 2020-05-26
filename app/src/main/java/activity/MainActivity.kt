@@ -49,6 +49,9 @@ class MainActivity : AppCompatActivity() {
         buttonList = listOf(aToZButton, tempButton, lastUpdatedButton)
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, countryList)
+
+//        Spinner buttons provide 'tab' appearance
+//        Fragments within a tabbed activity were also an option, I tried to implement this but ran into some issues when sorting the list
         spinner.adapter = adapter
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -156,7 +159,8 @@ class MainActivity : AppCompatActivity() {
         val image: ImageView = findViewById(R.id.refresh)
         image.clearAnimation()
         val anim =
-            RotateAnimation(0F, 360F, (image.width / 2).toFloat(),
+            RotateAnimation(
+                0F, 360F, (image.width / 2).toFloat(),
                 (image.height / 2).toFloat()
             )
         anim.fillAfter = true
@@ -171,9 +175,9 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(applicationContext, "App Refreshed", Toast.LENGTH_SHORT).show()
     }
 
-    fun setButtonAsActive(button: Button?){
-        for (currentButton in buttonList){
-            if (button == currentButton){
+    fun setButtonAsActive(button: Button?) {
+        for (currentButton in buttonList) {
+            if (button == currentButton) {
                 currentButton.setBackgroundColor(Color.BLACK)
                 currentButton.setTextColor(Color.WHITE)
             } else {

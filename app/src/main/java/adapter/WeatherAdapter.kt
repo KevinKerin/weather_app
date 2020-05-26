@@ -12,7 +12,8 @@ import activity.VenueActivity
 import kotlinx.android.synthetic.main.item.view.*
 import model.Venue
 
-class WeatherAdapter(private val venueList: List<Venue>) : RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
+class WeatherAdapter(private val venueList: List<Venue>) :
+    RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item, parent, false)
@@ -24,13 +25,13 @@ class WeatherAdapter(private val venueList: List<Venue>) : RecyclerView.Adapter<
 
         holder.imageView.setImageResource(currentItem.imageResource)
         holder.venueTextView.text = currentItem._name
-        if(currentItem._weatherConditionIcon != null){
+        if (currentItem._weatherConditionIcon != null) {
             holder.weatherConditionTextView.text = currentItem._weatherCondition
 
         } else {
             holder.weatherConditionTextView.text = "No information available"
         }
-        if(currentItem._weatherTemp != null){
+        if (currentItem._weatherTemp != null) {
             holder.temperatureTextView.text = currentItem._weatherTempInt.toString() + "°"
             holder.lastUpdatedListTextView.text = "Updated " + currentItem.dateMainActivityString
         } else {

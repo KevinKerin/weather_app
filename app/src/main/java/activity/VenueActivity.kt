@@ -41,13 +41,23 @@ class VenueActivity : AppCompatActivity() {
         lastUpdatedVenueTextView = findViewById(R.id.last_updated_venue_text_view)
         imageView = findViewById(R.id.image_view)
 
-        textViewList = listOf(venueTextView, countryTextView, weatherConditionTextView, windTextView,
-            humidityTextView, tempTextView, tempFeelsLikeTextView, lastUpdatedVenueTextView)
+        textViewList = listOf(
+            venueTextView, countryTextView, weatherConditionTextView, windTextView,
+            humidityTextView, tempTextView, tempFeelsLikeTextView, lastUpdatedVenueTextView
+        )
 
-        stringList = listOf(venue?._name, venue?._country?._name, venue?._weatherCondition, venue?._weatherWind,
-        venue?._weatherHumidity, venue?._weatherTemp, venue?._weatherFeelsLike, venue?.dateVenueActivityString) as List<String>
+        stringList = listOf(
+            venue?._name,
+            venue?._country?._name,
+            venue?._weatherCondition,
+            venue?._weatherWind,
+            venue?._weatherHumidity,
+            venue?._weatherTemp,
+            venue?._weatherFeelsLike,
+            venue?.dateVenueActivityString
+        ) as List<String>
 
-        for (view in textViewList){
+        for (view in textViewList) {
             var currentIndex: Int = textViewList.indexOf(view)
             setTextView(venue, view, stringList[currentIndex])
         }
@@ -56,18 +66,19 @@ class VenueActivity : AppCompatActivity() {
 
     }
 
-
-    private fun setTextView(venue: Venue?, textView: TextView, string: String?){
-        if(string != null){
-            when (textView){
+    private fun setTextView(venue: Venue?, textView: TextView, string: String?) {
+        if (string != null) {
+            when (textView) {
                 venueTextView -> venueTextView.text = string
                 countryTextView -> countryTextView.text = string
                 weatherConditionTextView -> weatherConditionTextView.text = string
                 windTextView -> windTextView.text = string
                 humidityTextView -> humidityTextView.text = string
-                tempFeelsLikeTextView -> tempFeelsLikeTextView.text = "Feels like: "+ venue?._weatherFeelsLike + "°"
+                tempFeelsLikeTextView -> tempFeelsLikeTextView.text =
+                    "Feels like: " + venue?._weatherFeelsLike + "°"
                 tempTextView -> tempTextView.text = "Temperature: " + venue?._weatherTemp + "°"
-                lastUpdatedVenueTextView -> lastUpdatedVenueTextView.text = "Last Updated: " + venue?.dateVenueActivityString
+                lastUpdatedVenueTextView -> lastUpdatedVenueTextView.text =
+                    "Last Updated: " + venue?.dateVenueActivityString
             }
         } else {
             textView.text = " "
