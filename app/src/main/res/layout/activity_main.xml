@@ -25,7 +25,7 @@
             android:layout_height="35dp"
             android:layout_weight="0.1"
             android:onClick="refresh"
-            app:srcCompat="@drawable/refresh3" />
+            app:srcCompat="@drawable/refresh" />
 
     </LinearLayout>
 
@@ -73,7 +73,7 @@
             android:id="@+id/imageView"
             android:layout_width="18dp"
             android:layout_height="match_parent"
-            android:layout_weight=".5"
+            android:layout_weight=".3"
             android:onClick="reverseOrder"
             app:srcCompat="@drawable/toggle" />
 

@@ -9,7 +9,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weather_app.R
+import com.kevinkerin.weather_app.R
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import model.Venue

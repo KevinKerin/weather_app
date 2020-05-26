@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weather_app.R
+import com.kevinkerin.weather_app.R
 import activity.VenueActivity
 import kotlinx.android.synthetic.main.item.view.*
 import model.Venue

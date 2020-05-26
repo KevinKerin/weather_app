@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import com.example.weather_app.R
+import com.kevinkerin.weather_app.R
 import model.Venue
 
 class VenueActivity : AppCompatActivity() {
