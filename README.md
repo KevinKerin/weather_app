@@ -3,6 +3,7 @@
 
 Instructions to run:
 
-- Create a new GitHub repository locally and set the origin as the URL of this repository
+- Create a new GitHub repository locally
+- Set the remote as the URL of this repository
 - Pull the repository
 - Build the APK and run on any Android device, or build through an Android Virtual Device within Android Studio
