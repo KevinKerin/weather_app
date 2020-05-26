@@ -12,7 +12,7 @@ import activity.VenueActivity
 import kotlinx.android.synthetic.main.item.view.*
 import model.Venue
 
-class MyAdapter(private val venueList: List<Venue>) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+class WeatherAdapter(private val venueList: List<Venue>) : RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item, parent, false)

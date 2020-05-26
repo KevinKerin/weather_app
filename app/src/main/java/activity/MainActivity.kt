@@ -1,6 +1,6 @@
 package activity
 
-import adapter.MyAdapter
+import adapter.WeatherAdapter
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -24,7 +24,7 @@ import kotlin.collections.ArrayList
 class MainActivity : AppCompatActivity() {
 
     lateinit var weatherData: WeatherData
-    lateinit var adapter: MyAdapter
+    lateinit var adapter: WeatherAdapter
     lateinit var aToZButton: Button
     lateinit var tempButton: Button
     lateinit var lastUpdatedButton: Button
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                     val selectedCountry = countryList[position]
                     filteredVenueList = venueList?.filter { it._country._name == selectedCountry }
                     val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
-                    recyclerView.adapter = MyAdapter(filteredVenueList!!)
+                    recyclerView.adapter = WeatherAdapter(filteredVenueList!!)
                 }
             }
         }
@@ -139,7 +139,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 runOnUiThread {
-                    adapter = MyAdapter(venueList!!)
+                    adapter = WeatherAdapter(venueList!!)
                     recycler_view.adapter = adapter
                     jsonResponseComplete = true
                 }
@@ -185,7 +185,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateView() {
         val updatedView = findViewById<RecyclerView>(R.id.recycler_view)
-        adapter = filteredVenueList?.let { MyAdapter(it) }!!
+        adapter = filteredVenueList?.let { WeatherAdapter(it) }!!
         updatedView.adapter = adapter
     }
 

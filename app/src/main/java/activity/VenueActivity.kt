@@ -1,6 +1,6 @@
 package activity
 
-import adapter.MyAdapter
+import adapter.WeatherAdapter
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,44 +12,66 @@ import model.Venue
 
 class VenueActivity : AppCompatActivity() {
 
+    lateinit var textViewList: List<TextView>
+    lateinit var stringList: List<String>
+    lateinit var venueTextView: TextView
+    lateinit var countryTextView: TextView
+    lateinit var weatherConditionTextView: TextView
+    lateinit var windTextView: TextView
+    lateinit var humidityTextView: TextView
+    lateinit var tempTextView: TextView
+    lateinit var tempFeelsLikeTextView: TextView
+    lateinit var lastUpdatedVenueTextView: TextView
+    lateinit var imageView: ImageView
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_venue)
 
-        val venue = intent.getSerializableExtra(MyAdapter.ViewHolder.VENUE_KEY) as? Venue
+        val venue = intent.getSerializableExtra(WeatherAdapter.ViewHolder.VENUE_KEY) as? Venue
 
-        val venueTextView: TextView = findViewById(R.id.venue_text_view)
-        val countryTextView: TextView = findViewById(R.id.country_text_view)
-        val weatherConditionTextView: TextView = findViewById(R.id.temperature_text_view)
-        val windTextView: TextView = findViewById(R.id.wind_text_view)
-        val humidityTextView: TextView = findViewById(R.id.humidity_text_view)
-        val tempTextView: TextView = findViewById(R.id.temp_text_view)
-        val tempFeelsLikeTextView: TextView = findViewById(R.id.temp_feels_like_text_view)
-        val lastUpdatedVenueTextView: TextView = findViewById(R.id.last_updated_venue_text_view)
-        val imageView: ImageView = findViewById(R.id.image_view)
+        venueTextView = findViewById(R.id.venue_text_view)
+        countryTextView = findViewById(R.id.country_text_view)
+        weatherConditionTextView = findViewById(R.id.temperature_text_view)
+        windTextView = findViewById(R.id.wind_text_view)
+        humidityTextView = findViewById(R.id.humidity_text_view)
+        tempTextView = findViewById(R.id.temp_text_view)
+        tempFeelsLikeTextView = findViewById(R.id.temp_feels_like_text_view)
+        lastUpdatedVenueTextView = findViewById(R.id.last_updated_venue_text_view)
+        imageView = findViewById(R.id.image_view)
 
-        venueTextView.text = venue?._name
-        countryTextView.text = venue?._country?._name
-        weatherConditionTextView.text = venue?._weatherCondition
-        windTextView.text = venue?._weatherWind
-        humidityTextView.text = venue?._weatherHumidity
+        textViewList = listOf(venueTextView, countryTextView, weatherConditionTextView, windTextView,
+            humidityTextView, tempTextView, tempFeelsLikeTextView, lastUpdatedVenueTextView)
+
+        stringList = listOf(venue?._name, venue?._country?._name, venue?._weatherCondition, venue?._weatherWind,
+        venue?._weatherHumidity, venue?._weatherTemp, venue?._weatherFeelsLike, venue?.dateVenueActivityString) as List<String>
+
+        for (view in textViewList){
+            var currentIndex: Int = textViewList.indexOf(view)
+            setTextView(venue, view, stringList[currentIndex])
+        }
+
         venue?.imageResource?.let { imageView.setImageResource(it) }
-        if(venue?._weatherTemp != null){
-            tempTextView.text = "Temperature: " + venue?._weatherTemp + "°"
-        } else {
-            tempTextView.text = " "
-        }
-        if(venue?._weatherTemp != null){
-            tempFeelsLikeTextView.text = "Feels like: " + venue?._weatherFeelsLike + "°"
-        } else {
-            tempFeelsLikeTextView.text = " "
-        }
-        if(venue?._weatherLastUpdated != 0L){
-            lastUpdatedVenueTextView.text = "Last Updated: " + venue?.dateVenueActivityString
-        } else {
-            lastUpdatedVenueTextView.text = " "
-        }
 
     }
+
+
+    private fun setTextView(venue: Venue?, textView: TextView, string: String?){
+        if(string != null){
+            when (textView){
+                venueTextView -> venueTextView.text = string
+                countryTextView -> countryTextView.text = string
+                weatherConditionTextView -> weatherConditionTextView.text = string
+                windTextView -> windTextView.text = string
+                humidityTextView -> humidityTextView.text = string
+                tempFeelsLikeTextView -> tempFeelsLikeTextView.text = "Feels like: "+ venue?._weatherFeelsLike + "°"
+                tempTextView -> tempTextView.text = "Temperature: " + venue?._weatherTemp + "°"
+                lastUpdatedVenueTextView -> lastUpdatedVenueTextView.text = "Last Updated: " + venue?.dateVenueActivityString
+            }
+        } else {
+            textView.text = " "
+        }
+    }
+
 }
