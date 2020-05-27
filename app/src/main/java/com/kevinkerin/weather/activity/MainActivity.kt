@@ -1,6 +1,5 @@
-package activity
+package com.kevinkerin.weather.activity
 
-import adapter.WeatherAdapter
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -9,11 +8,12 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.kevinkerin.weather_app.R
 import com.google.gson.GsonBuilder
+import com.kevinkerin.weather.R
+import com.kevinkerin.weather.adapter.WeatherAdapter
+import com.kevinkerin.weather.model.Venue
+import com.kevinkerin.weather.model.WeatherData
 import kotlinx.android.synthetic.main.activity_main.*
-import com.kevinkerin.weather_app.model.Venue
-import com.kevinkerin.weather_app.model.WeatherData
 import okhttp3.*
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -72,7 +72,10 @@ class MainActivity : AppCompatActivity() {
                     val selectedCountry = countryList[position]
                     filteredVenueList = venueList?.filter { it._country._name == selectedCountry }
                     val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
-                    recyclerView.adapter = WeatherAdapter(filteredVenueList!!)
+                    recyclerView.adapter =
+                        WeatherAdapter(
+                            filteredVenueList!!
+                        )
                 }
             }
         }
@@ -142,7 +145,10 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 runOnUiThread {
-                    adapter = WeatherAdapter(venueList!!)
+                    adapter =
+                        WeatherAdapter(
+                            venueList!!
+                        )
                     recycler_view.adapter = adapter
                     jsonResponseComplete = true
                 }
@@ -189,7 +195,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateView() {
         val updatedView = findViewById<RecyclerView>(R.id.recycler_view)
-        adapter = filteredVenueList?.let { WeatherAdapter(it) }!!
+        adapter = filteredVenueList?.let {
+            WeatherAdapter(
+                it
+            )
+        }!!
         updatedView.adapter = adapter
     }
 

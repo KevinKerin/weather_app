@@ -1,6 +1,6 @@
-package com.kevinkerin.weather_app
+package com.kevinkerin.weather
 
-import activity.MainActivity
+import com.kevinkerin.weather.activity.MainActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click

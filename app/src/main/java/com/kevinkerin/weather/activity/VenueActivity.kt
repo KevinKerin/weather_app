@@ -1,14 +1,14 @@
-package activity
+package com.kevinkerin.weather.activity
 
-import adapter.WeatherAdapter
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import com.kevinkerin.weather_app.R
-import com.kevinkerin.weather_app.model.Venue
+import androidx.appcompat.app.AppCompatActivity
+import com.kevinkerin.weather.R
+import com.kevinkerin.weather.adapter.WeatherAdapter
+import com.kevinkerin.weather.model.Venue
 
 class VenueActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package adapter
+package com.kevinkerin.weather.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -7,17 +7,19 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.kevinkerin.weather_app.R
-import activity.VenueActivity
+import com.kevinkerin.weather.R
+import com.kevinkerin.weather.activity.VenueActivity
+import com.kevinkerin.weather.model.Venue
 import kotlinx.android.synthetic.main.item.view.*
-import com.kevinkerin.weather_app.model.Venue
 
 class WeatherAdapter(private val venueList: List<Venue>) :
     RecyclerView.Adapter<WeatherAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item, parent, false)
-        return ViewHolder(itemView)
+        return ViewHolder(
+            itemView
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -38,7 +40,7 @@ class WeatherAdapter(private val venueList: List<Venue>) :
             holder.temperatureTextView.text = null
             holder.lastUpdatedListTextView.text = " "
         }
-        holder?.venue = currentItem
+        holder.venue = currentItem
     }
 
     override fun getItemCount(): Int {

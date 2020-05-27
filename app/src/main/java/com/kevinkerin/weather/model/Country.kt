@@ -1,4 +1,4 @@
-package com.kevinkerin.weather_app.model
+package com.kevinkerin.weather.model
 
 import java.io.Serializable
 
